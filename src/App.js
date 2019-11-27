@@ -46,7 +46,7 @@ function App() {
     let queryParams = {
       response_type : "token",
       client_id : "e104679a4aea401182b875161a94e9e0",
-      redirect_uri : (window.localtion && window.localtion.href) ? window.localtion.href : "http://localhost:3000"
+      redirect_uri : (window.location && window.location.href) ? window.location.href : "http://localhost:3000"
   }
   let url = buildUrl("https://accounts.spotify.com/authorize" , queryParams);
   window.location = url;
