@@ -46,6 +46,7 @@ function App() {
     let queryParams = {
       response_type : "token",
       client_id : "e104679a4aea401182b875161a94e9e0",
+      scope: "user-read-private%20user-read-email",
       redirect_uri : (window.location && window.location.href) ? window.location.href : "http://localhost:3000"
   }
   let url = buildUrl("https://accounts.spotify.com/authorize" , queryParams);
@@ -75,23 +76,11 @@ function App() {
       console.log("user");
       console.log(user);
       setUser(user);
-    })
-    fetch('http://ip-api.com/json')
-    .then(
-        function success(response) {
-            console.log('User\'s Location Data is ', response);
-            console.log('User\'s Country', response.country);
-            return response.json()
-        },
-  
-        function fail(data, status) {
-            console.log('Request failed.  Returned status of',
-                        status);
-        }
-    ).then(res => {
-      console.log(res);
-      setCountry(res);
-      spotifyApi.getFeaturedPlaylists({ country: (res.countryCode ? res.countryCode : "US")})  // note that we don't pass a user id
+      if(user.country){
+        setCountry(user.country);
+      }
+      
+      spotifyApi.getFeaturedPlaylists({ country: ((user && user.country) ? user.country : "US")})  // note that we don't pass a user id
   .then(function(data) {
     console.log('User playlists', data);
     if(data.playlists){
@@ -100,7 +89,23 @@ function App() {
   }, function(err) {
     console.error(err);
   });
-    });
+    })
+    // fetch('http://ip-api.com/json' ,{cors: true})
+    // .then(
+    //     function success(response) {
+    //         console.log('User\'s Location Data is ', response);
+    //         console.log('User\'s Country', response.country);
+    //         return response.json()
+    //     },
+  
+    //     function fail(data, status) {
+    //         console.log('Request failed.  Returned status of',
+    //                     status);
+    //     }
+    // ).then(res => {
+    //   console.log(res);
+      
+    // });
     // spotifyApi.setPromiseImplementation(Q);
     // spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function(err, data) {
     //   if (err) console.error(err);
