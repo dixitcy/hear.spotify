@@ -38,16 +38,17 @@ function buildUrl(url, parameters) {
 
   return url;
 }
-
+console.log(window.location)
 function App() {
 
   const authorizeSpotify = () => {
     console.log("authorizeSpotify");
+    console.log(window.location.href)
     let queryParams = {
       response_type : "token",
       client_id : "e104679a4aea401182b875161a94e9e0",
       scope: "user-read-private%20user-read-email",
-      redirect_uri : (window.location && window.location.href) ? window.location.href : "http://localhost:3000"
+      redirect_uri : (window.location && window.location.origin) ? window.location.origin : "http://localhost:3000"
   }
   let url = buildUrl("https://accounts.spotify.com/authorize" , queryParams);
   window.location = url;
@@ -132,7 +133,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">    
-      {country &&<h1 style={{textDecoration: "underline"}}>country , {country.country}</h1>}
+      {country &&<h1 style={{textDecoration: "underline"}}>country , {country}</h1>}
         {/* <div className="block input-block"  >
         <input type="email" name="email" id="email"/>
         </div> */}
