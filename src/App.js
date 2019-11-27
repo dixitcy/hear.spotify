@@ -188,10 +188,10 @@ function App() {
 
       
       {!selectedTrack && <div className="tracks-container">
-        {tracks.map(track => (
+        {tracks.map(track => (track.track ?
           <div className="block" onClick={() => {setSelectedTrack(track.track)}}>
             {track.track.name}
-          </div>
+          </div> : ""
         ))}
         </div>}
         {selectedTrack && <div className="track-container">
