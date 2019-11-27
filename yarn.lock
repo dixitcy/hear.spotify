@@ -6934,9 +6934,9 @@ mississippi@^3.0.0:
     through2 "^2.0.0"
 
 mixin-deep@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.1.tgz#a49e7268dce1a0d9698e45326c5626df3543d0fe"
-  integrity sha512-8ZItLHeEgaqEvd5lYBXfm4EZSFCX29Jb9K+lAHhDKzReKBQKj3R+7NOF6tjqYi9t4oI8VUfaWITJQm86wnXGNQ==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
+  integrity sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==
   dependencies:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
@@ -9748,6 +9748,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+spotify-web-api-js@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/spotify-web-api-js/-/spotify-web-api-js-1.2.0.tgz#edfbbcf5a2727c1873c5a310a40f8f1f2b4ecb8a"
+  integrity sha512-S5Awpk/uDwbn5WQbZmnU3RG/Hi68yX6ElQy9ewUu+ZSWiswufp50Vfg7vvXPaRfflL5/p/SOaU2x1idNRrzADA==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -10772,6 +10777,11 @@ wide-align@^1.1.0:
   integrity sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
   dependencies:
     string-width "^1.0.2 || 2"
+
+wingcss@^1.0.0-beta:
+  version "1.0.0-beta"
+  resolved "https://registry.yarnpkg.com/wingcss/-/wingcss-1.0.0-beta.tgz#0d2ec3267e91b47c76eb3c02069765e7953ccc1d"
+  integrity sha1-DS7DJn6RtHx26zwCBpdl55U8zB0=
 
 word-wrap@~1.2.3:
   version "1.2.3"
