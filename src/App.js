@@ -1,6 +1,10 @@
 import React , {Fragment} from 'react';
 import './App.css';
 import * as SpotifyWebApi from 'spotify-web-api-js';
+import Track from './components/Track';
+import Playlist from './components/Playlist';
+import Playlists from './components/Playlists';
+import Breadcrumbs from './components/Breadcrumbs';
 
 var spotifyApi = new SpotifyWebApi();
 
@@ -38,7 +42,7 @@ function buildUrl(url, parameters) {
 
   return url;
 }
-console.log(window.location)
+// console.log(window.location)
 function App() {
 
   const authorizeSpotify = () => {
@@ -122,90 +126,28 @@ function App() {
   const [selectedPlaylist, setPlaylist] = React.useState();
   const [user , setUser] = React.useState(null);
   const [country , setCountry] = React.useState(null);
-
-  const getSongDuration = (durationinms) => {
-    let durationinsecs = Math.round(durationinms/1000);
-    let minutes = Math.floor(durationinsecs/60);
-    let seconds = durationinsecs - (minutes*60)
-    return minutes+ ":"+seconds
-  }
   
   return (
     <div className="App">
       <header className="App-header">    
-      {country &&<h1 style={{textDecoration: "underline"}}>country , {country}</h1>}
-        {/* <div className="block input-block"  >
-        <input type="email" name="email" id="email"/>
-        </div> */}
+      {country &&<h1 style={{textDecoration: "underline"}}>country , {country}</h1>}        
       
-      {!user && <button onClick={() => {authorizeSpotify()}} className="block" style={{position :"absolute" , top : "1em" , left: "90%"}}>authorize spotify</button>}
+      {!user && <button onClick={() => {authorizeSpotify()}} className="block" style={user ? {position :"absolute" , top : "1em" , left: "90%"} : {position :"absolute" , top : "calc(50% - 50px)" , left: "calc(50% - 150px)" , width : "300px" , height: "100px" , fontSize: "24px"}}>authorize spotify</button>}
       {user && <button onClick={() => {
 
       }} className="block accent" style={{position :"absolute" , top : "1em" , left: "90%"}}>{user && user.display_name ? user && user.display_name : "" }</button>}
-      {/* <div className="block">gaga</div> */}
-      {true && <div style={{display: "flex" , flexDirection:"row" , justifyContent: "end" , alignItems : "flex-start" , width: "80%"}}> <div className="block nav" style={{textDecoration: "underline"}} onClick={() => {
-        setPlaylist(null);
-        setTracks([]);
-        setSelectedTrack(null);
-      }}>{"playlists"}</div> 
-      {selectedPlaylist && 
-      <div className="block nav" style={{textDecoration: "underline"}} onClick={() => {
-        setSelectedTrack(null);
-      }}>{" / "+(selectedPlaylist.name)} 
-      </div>}
-      {selectedTrack && <div className="block nav" style={{textDecoration: "underline"}} onClick={() => {
-        setSelectedTrack(null);
-      }}>{" / "+ selectedTrack.name}</div>}</div>
-      }
-      {tracks.length === 0 && <div className="playlist-container">
-      {playlists.map(playlist => {
-        return (<div className="block" onClick={() => {
-          spotifyApi.getPlaylist(playlist.id)
-  .then(function(data) {
-    console.log('User playlist', data);
-    setTracks(data.tracks.items);
-    setPlaylist(data);
-    setSelectedTrack(null);
-  }, function(err) {
-    console.error(err);
-  });
-        }}>
-          <div className="smol-header" style={{display : "flex" , flexDirection : "column"}}>
-            <div className="playlist-img" style={{textAlign : "left", flexGrow: 1}}>
-              <img style={{maxWidth:  "200px"}} alt={playlist.playlist} src={playlist.images[0].url} />
-            </div>
-            <div>
-            <div className="playlist-title" style={{flexGrow: 3}}>{playlist.name}</div>
-            <div className="playlist-about" style={{textAlign : "left", fontSize: "12px", fontWeight : 100, flexGrow: 3}}>{playlist.tracks.total + " tracks"}</div>            
-            </div>
-            
-            
-            </div>
-        </div>)
-      })}
-      </div>}
+      <Breadcrumbs playlists={playlists} selectedPlaylist={selectedPlaylist} selectedTrack={selectedTrack} setPlaylist={setPlaylist} setTracks={setTracks} setSelectedTrack={setSelectedTrack}  />
+      
+       
+      {tracks.length === 0 && playlists && playlists.length > 0 && <Playlists setTracks={setTracks} spotifyApi={spotifyApi} setSelectedTrack={setSelectedTrack} setPlaylist={setPlaylist} playlists={playlists} />}
+      
       <div style={{display: "flex" , flexDirection:"row" , width : "80%" , margin: "auto" , justifyContent : "flex-start"}}>
 
       
       {!selectedTrack && <div className="tracks-container">
-        {tracks.map(track => (track.track ?
-          <div className="block" onClick={() => {setSelectedTrack(track.track)}}>
-            {track.track.name}
-          </div> : ""
-        ))}
+        {tracks.map(track => (<Playlist setSelectedTrack={setSelectedTrack} track={track} />))}
         </div>}
-        {selectedTrack && <div className="track-container">
-        <div className="block track" style={{display: "flex" , flexDirection : "column" }}>
-            <img style={{maxWidth: "200px"}} src={selectedTrack.album.images[0].url} alt={selectedTrack.name} />             
-          </div>
-          <div className="block p-10">
-            <div>{selectedTrack.name}</div>
-            <div> <div className="highlite" style={{position:"relative", display:"inline-block", fontStyle:"italic"}}> {selectedTrack.artists[0].name}</div>
-            </div><div>{getSongDuration(selectedTrack.duration_ms)}</div>
-            </div>
-          
-          
-        </div>}
+        {selectedTrack && <Track setSelectedTrack={setSelectedTrack} selectedTrack={selectedTrack} />}
         </div>
       </header>
       
