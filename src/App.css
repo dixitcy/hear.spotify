@@ -93,7 +93,7 @@ input {
 }
 
 .App-header {
-  background-color: #50a2f7;
+  background-color: #dadada;
   min-height: 100vh;
   /* display: flex; */
   flex-direction: column;
