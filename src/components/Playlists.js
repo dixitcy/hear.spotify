@@ -63,7 +63,6 @@ React.useEffect(() => {
           <Track setSelectedTrack={setSelectedTrack} selectedTrack={selectedTrack} />
         </Route>
         <Route path={match.path}>
-          <h3>Please select a topic.</h3>
           {playlists.map(playlist => {
         return (
           

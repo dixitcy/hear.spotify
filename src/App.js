@@ -129,6 +129,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">    
+      {country &&<h1 style={{marginTop : "0px", textDecoration: "underline"}}>country , {country}</h1>}        
       <Router style={{ height: "100%" }}>
             <div>
 
@@ -161,7 +162,7 @@ function App() {
                 </Switch>
                 </div>
                 </Router>
-      {country &&<h1 style={{marginTop : "0px", textDecoration: "underline"}}>country , {country}</h1>}        
+      
       
       {!user && <button onClick={() => {authorizeSpotify()}} className="block" style={user ? {position :"absolute" , top : "1em" , left: "90%"} : {position :"absolute" , top : "calc(50% - 50px)" , left: "calc(50% - 150px)" , width : "300px" , height: "100px" , fontSize: "24px"}}>authorize spotify</button>}
       {user && <button onClick={() => {
